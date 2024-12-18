@@ -1,0 +1,82 @@
+body {
+    background-color: #121212;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', Arial, sans-serif;
+    color: white;
+    text-align: center;
+    line-height: 1.6;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 36px;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    color: #f5f5f5;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    gap: 40px; /* Espacio entre cuadros */
+    width: 90%; /* Ajusta el ancho */
+    max-width: 1200px; /* Máximo ancho */
+    margin: 0 auto; /* Centra el contenedor */
+    padding: 20px;
+    height: 80vh; /* Ocupa el 80% de la altura de la ventana */
+}
+
+.grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 32px; /* Texto más grande */
+    font-weight: bold;
+    padding: 50px; /* Espacio interno */
+    border-radius: 15px;
+    background: linear-gradient(145deg, #1c1c1c, #252525);
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.7), -4px -4px 10px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.grid-item:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.9), -6px -6px 12px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(145deg, #252525, #1c1c1c);
+}
+
+.red {
+    background: linear-gradient(145deg, #ff6d72, #e04d51);
+}
+
+.blue {
+    background: linear-gradient(145deg, #2093e0, #1674b0);
+}
+
+.green {
+    background: linear-gradient(145deg, #9be533, #78b71f);
+}
+
+.orange {
+    background: linear-gradient(145deg, #ffdb54, #e0b835);
+}
+
+.grid-item:hover.red {
+    background: linear-gradient(145deg, #e04d51, #ff6d72);
+}
+
+.grid-item:hover.blue {
+    background: linear-gradient(145deg, #1674b0, #2093e0);
+}
+
+.grid-item:hover.green {
+    background: linear-gradient(145deg, #78b71f, #9be533);
+}
+
+.grid-item:hover.orange {
+    background: linear-gradient(145deg, #e8c14d, #f5d75e); /* Un poco más claro */
+}
+

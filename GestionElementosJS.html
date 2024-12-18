@@ -1,11 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="GestionElementosJS.css">
+    <title>Formulario de Elementos</title>
 </head>
+
 <body>
-    
+    <h1>Formulario</h1>
+    <p>Selecciona un color: <input type="color" id="colorPicker"></p>
+    <button onclick="cambiarColorFondo()">Cambiar color de fondo</button>
+    <button onclick="agregarElemento()">Añadir más elementos</button>
+    <h2>Elementos</h2>
+    <div id="elementos">
+        <div id="elemento">
+            <img src="caballo.jpg" alt="Caballo"><br>
+            <button onclick="cambiarElemento(this)">Cambiar</button>
+            <button onclick="borrarElemento(this)">Borrar</button>
+        </div>
+    </div>
+
+    <script>
+        function cambiarColorFondo() {
+            let color = document.getElementById("colorPicker").value;
+
+            imagenes = document.querySelectorAll('img')
+
+            imagenes.forEach(element => {
+                element.style.backgroundColor = color
+            });
+        }
+
+        function agregarElemento() {
+            div = document.querySelector('#elementos')
+
+            elemento = document.createElement('div')
+
+            elemento.id = 'elemento'
+
+            imagen = document.createElement('img')
+
+            imagen.src = 'caballo.jpg'
+            imagen.alt = 'Caballo'
+
+            botonCambiar = document.createElement('button')
+            botonCambiar.onclick = function () {
+                cambiarElemento(this);
+            };
+            botonCambiar.textContent = 'Cambiar'
+
+            botonEliminar = document.createElement('button')
+            botonEliminar.onclick = function () {
+                borrarElemento(this);
+            };
+            botonEliminar.textContent = 'Borrar'
+
+            br = document.createElement('br')
+
+            elemento.appendChild(imagen)
+            elemento.appendChild(br)
+            elemento.appendChild(botonCambiar)
+            elemento.appendChild(botonEliminar)
+
+            div.appendChild(elemento)
+        }
+
+        function cambiarElemento(elemento) {
+            const img = elemento.closest("#elemento").querySelector("img");
+            const srcActual = img.getAttribute("src");
+
+            const imagenOriginal = "caballo.jpg";
+            const imagenNueva = "caballo2.jpg";
+
+            if (srcActual == imagenOriginal) {
+                img.src = imagenNueva
+            } else {
+                img.src = imagenOriginal
+            }
+
+        }
+
+        function borrarElemento(elemento) {
+            elemento.parentNode.remove();
+        }
+    </script>
 </body>
+
 </html>
