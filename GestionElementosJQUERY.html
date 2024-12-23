@@ -1,11 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="GestionElementosJQUERY.css">
+    <title>Formulario de Elementos</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
-    
+    <h1>Formulario</h1>
+    <p>Selecciona un color: <input type="color" id="colorPicker"></p>
+    <button id="btnCambiarColor">Cambiar color de fondo</button>
+    <button id="btnAgregarElemento">Añadir más elementos</button>
+    <h2>Elementos</h2>
+    <div id="elementos">
+        <div class="elemento">
+            <img src="caballo.jpg" alt="Caballo"><br>
+            <button class="btnCambiar">Cambiar</button>
+            <button class="btnBorrar">Borrar</button>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#btnCambiarColor').click(function () {
+                let color = $('#colorPicker').val();
+                $('img').css('background-color', color);
+            });
+
+            $('#btnAgregarElemento').click(function () {
+                const nuevoElemento = $(
+                    `<div class="elemento">
+                        <img src="caballo.jpg" alt="Caballo"><br>
+                        <button class="btnCambiar">Cambiar</button>
+                        <button class="btnBorrar">Borrar</button>
+                    </div>`
+                );
+
+                $('#elementos').append(nuevoElemento);
+            });
+
+            $('#elementos').on('click', '.btnCambiar', function () {
+                const img = $(this).siblings('img');
+                const srcActual = img.attr('src');
+                const imagenOriginal = "caballo.jpg";
+                const imagenNueva = "caballo2.jpg";
+
+                img.attr('src', srcActual === imagenOriginal ? imagenNueva : imagenOriginal);
+            });
+
+            $('#elementos').on('click', '.btnBorrar', function () {
+                $(this).parent().remove();
+            });
+        });
+    </script>
 </body>
+
 </html>
