@@ -1,11 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="HumanBenchamarkJQUERY.css">
+    <title>Human Benchmark JQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
-    
+    <div>
+        <div id="main" class="initial">Click to Start</div>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            const main = $('#main');
+            const message = $('#message');
+
+            let timeout; // To store the random timeout
+            let startTime; // To store the time when the screen turns red
+
+            main.click(function () {
+                if (main.hasClass('initial')) {
+                    // Move to "waiting" state
+                    main.removeClass('initial').addClass('waiting').text('Wait for Red...');
+                    message.text('');
+
+                    // Set random time (2 to 5 seconds)
+                    const randomTime = Math.random() * 3000 + 2000;
+
+                    timeout = setTimeout(function () {
+                        // Move to "ready" state
+                        main.removeClass('waiting').addClass('ready').text('Click Now!');
+                        startTime = Date.now();
+                    }, randomTime);
+                } else if (main.hasClass('waiting')) {
+                    // Clicked before red screen
+                    clearTimeout(timeout);
+                    main.removeClass('waiting').addClass('initial').text('Click to Start');
+                    message.text('Too soon! Try again.');
+                } else if (main.hasClass('ready')) {
+                    // Calculate reaction time
+                    const reactionTime = Date.now() - startTime;
+
+                    // Move to "final" state
+                    main.removeClass('ready').addClass('final').text('Click to Restart');
+                    message.text(`Your reaction time: ${reactionTime} ms`);
+                } else if (main.hasClass('final')) {
+                    // Reset to "initial" state
+                    main.removeClass('final').addClass('initial').text('Click to Start');
+                    message.text('');
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
